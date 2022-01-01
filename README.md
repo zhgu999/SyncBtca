@@ -21,5 +21,5 @@ sudo pip3 install pymysql
 sudo pip3 install protobuf
 protoc ./dbp/dbp.proto  --python_out=./
 protoc ./dbp/lws.proto  --python_out=./
-./dbp.py
+./btca.py
 ```
