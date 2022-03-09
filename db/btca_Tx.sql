@@ -53,7 +53,7 @@ CREATE TABLE `Tx` (
   KEY `client_in` (`client_in`) USING BTREE,
   KEY `dpos_out` (`dpos_out`) USING BTREE,
   KEY `client_out` (`client_out`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10847540 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

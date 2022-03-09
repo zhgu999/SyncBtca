@@ -40,7 +40,7 @@ CREATE TABLE `Block` (
   KEY `height` (`height`) USING BTREE,
   KEY `reward_address` (`reward_address`) USING BTREE,
   KEY `time` (`time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1086030 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
