@@ -8,7 +8,7 @@ from decimal import Decimal
 import sys
 import os
 import config
-import logging
+#import logging
 import traceback
 
 from TokenDistribution import TokenDistribution
@@ -18,10 +18,10 @@ td = TokenDistribution()
 url = config.url
 connection = pymysql.connect(host=config.host, port=config.port, user=config.user, password=config.password, db=config.db)
 
-def log(fileName):
-    logging.basicConfig(filename=fileName,filemode='a',level=logging.INFO,format='%(asctime)s %(levelname)s %(message)s')
+#def log(fileName):
+#    logging.basicConfig(filename=fileName,filemode='a',level=logging.INFO,format='%(asctime)s %(levelname)s %(message)s')
     
-log('log_task.log')
+#log('log_task.log')
 
 def ExecSql(sql):
     try:
