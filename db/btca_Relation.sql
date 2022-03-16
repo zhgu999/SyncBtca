@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.36, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.37, for Linux (x86_64)
 --
--- Host: 159.138.123.135    Database: btca
+-- Host: localhost    Database: btca
 -- ------------------------------------------------------
--- Server version	5.7.36-0ubuntu0.18.04.1
+-- Server version	5.7.37-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -27,8 +27,9 @@ CREATE TABLE `Relation` (
   `upper` varchar(64) DEFAULT NULL COMMENT '上级地址',
   `lower` varchar(64) DEFAULT NULL COMMENT '下级地址',
   `txid` varchar(64) DEFAULT NULL COMMENT '交易id',
+  `created_at` int(11) DEFAULT NULL COMMENT '创建交易的时间戳',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -40,4 +41,4 @@ CREATE TABLE `Relation` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-27 15:09:07
+-- Dump completed on 2022-03-16 11:44:33

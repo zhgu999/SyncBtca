@@ -79,8 +79,8 @@ def InsertTx(block_id,tx,cursor):
         elif len(data) >= 4096:
             data = data[:4096]     
     if tx["type"] == 'defi-relation':
-        sql = "insert Relation(upper,lower,txid)values(%s,%s,%s)"
-        cursor.execute(sql,[tx["sendfrom"],tx["sendto"],tx["txid"]])
+        sql = "insert Relation(upper,lower,txid,created_at)values(%s,%s,%s,%s)"
+        cursor.execute(sql,[tx["sendfrom"],tx["sendto"],tx["txid"],tx["time"]])
     sql = "insert Tx(block_hash,txid,form,`to`,amount,free,type,lock_until,n,data,transtime)values(%s,%s,%s,%s,%s,%s,%s,%s,0,%s,%s)"
     cursor.execute(sql,[block_id,tx["txid"], tx["sendfrom"],tx["sendto"],tx["amount"],tx["txfee"],tx["type"],tx["lockuntil"],data,tx["time"]])
     amount = Decimal("%.6f" % tx["amount"])
