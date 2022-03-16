@@ -15,7 +15,7 @@ from TokenDistribution import TokenDistribution
 td = TokenDistribution()
 
 url = config.url
-connection = pymysql.connect(host=config.host_btca, port=config.port_btca, user=config.user_btca, password=config.password_btca, db=config.db_btca)
+connection = pymysql.connect(host=config.host, port=config.port, user=config.user, password=config.password, db=config.db)
 
 def ExecSql(sql):
     try:
@@ -232,7 +232,7 @@ def Getblockhash(height):
             "jsonrpc":"2.0",
             "params":{
                 "height":height,
-                "fork": config.forkid_btca  
+                "fork": config.forkid  
             }}
     response = requests.post(url, json=data)
     return json.loads(response.text)
@@ -242,7 +242,7 @@ def Getforkheight():
             "method":"getforkheight",
             "jsonrpc":"2.0",
             "params":{
-                "fork": config.forkid_btca  
+                "fork": config.forkid  
             }}
 
     response = requests.post(url, json=data)
@@ -259,7 +259,7 @@ def Getforkheight():
             "method":"getblock",
             "jsonrpc":"2.0",
             "params":{
-                "block": config.forkid_btca  
+                "block": config.forkid  
             }}
         response = requests.post(url, json=data)
         obj = json.loads(response.text)
