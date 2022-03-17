@@ -23,10 +23,11 @@ DROP TABLE IF EXISTS `addr`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `addr` (
-  `bbc_addr` varchar(64) NOT NULL,
-  `eth_addr` varchar(45) DEFAULT NULL,
-  `btc_addr` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`bbc_addr`)
+  `walletId` varchar(64) NOT NULL,
+  `bbc_addr` varchar(64) DEFAULT NULL,
+  `eth_addr` varchar(64) DEFAULT NULL,
+  `btc_addr` varchar(64) DEFAULT NULL,
+  PRIMARY KEY (`walletId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -39,4 +40,4 @@ CREATE TABLE `addr` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-03-15 16:08:13
+-- Dump completed on 2022-03-17 11:29:49

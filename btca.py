@@ -9,13 +9,21 @@ import sys
 import os
 import config
 import traceback
-
-from TokenDistribution import TokenDistribution
-
-td = TokenDistribution()
+import struct
 
 url = config.url
 connection = pymysql.connect(host=config.host_btca, port=config.port_btca, user=config.user_btca, password=config.password_btca, db=config.db_btca)
+
+def DefiReward(data):
+    buf = bytearray.fromhex(data)
+    amount, = struct.unpack('<q',buf[:8])
+    rank, = struct.unpack('<q',buf[8:16])
+    stake_reward, = struct.unpack('<q',buf[16:24])
+    achievement, = struct.unpack('<q',buf[24:32])
+    power, = struct.unpack('<q',buf[32:40])
+    promotion_reward, = struct.unpack('<q',buf[40:48])
+    return amount,rank,stake_reward,achievement,power,promotion_reward
+
 
 def ExecSql(sql):
     try:
@@ -56,7 +64,9 @@ def GetUsefulBlock(block_hash):
         connection.commit()
         return cursor.fetchone()
 
-def InsertTx(block_id,tx,cursor):
+def InsertTx(block_id,tx,cursor,height):
+    if (len(tx['vin']) == 0 and tx["amount"] == 0):
+        return
     in_money = Decimal(0)
     for vin in tx["vin"]:
         sql = "select id,amount,`to` from Tx where txid = %s and n = %s"
@@ -75,6 +85,13 @@ def InsertTx(block_id,tx,cursor):
     if tx["type"] == 'defi-relation':
         sql = "insert Relation(upper,lower,txid,created_at)values(%s,%s,%s,%s)"
         cursor.execute(sql,[tx["sendfrom"],tx["sendto"],tx["txid"],tx["time"]])
+    if tx["type"] == 'defi-reward':
+        amount,rank,stake_reward,achievement,power,promotion_reward = DefiReward(tx['data'])
+        sql = "insert reward(height,amount,rank,stake_reward,achievement,power,promotion_reward,address)values(%s,%s,%s,%s,%s,%s,%s,%s)"
+        cursor.execute(sql,[height,amount,rank,stake_reward,achievement,power,promotion_reward,tx['sendto']])
+        sql = 'update Relation set achievement = %s where lower = %s'
+        cursor.execute(sql,[achievement,tx['sendto']])
+
     sql = "insert Tx(block_hash,txid,form,`to`,amount,free,type,lock_until,n,data,transtime)values(%s,%s,%s,%s,%s,%s,%s,%s,0,%s,%s)"
     cursor.execute(sql,[block_id,tx["txid"], tx["sendfrom"],tx["sendto"],tx["amount"],tx["txfee"],tx["type"],tx["lockuntil"],data,tx["time"]])
     amount = Decimal("%.6f" % tx["amount"])
@@ -121,8 +138,8 @@ def Useful(block_hash):
             cursor.execute(sql)
         
         for tx in obj["tx"]:
-            InsertTx(block_hash,tx,cursor)
-        InsertTx(block_hash,obj["txmint"],cursor)
+            InsertTx(block_hash,tx,cursor,obj["height"])
+        InsertTx(block_hash,obj["txmint"],cursor,obj["height"])
         connection.commit()
         return True
 
@@ -271,21 +288,6 @@ def Getforkheight():
     else:
         return 0
 
-def Check():
-    sql1 = "SELECT height from Block ORDER BY id DESC LIMIT 1"
-    sql2 = "select sum(amount) as c from Tx where spend_txid is null"
-    with connection.cursor() as cursor :
-        cursor.execute(sql1)
-        connection.commit()
-        h = cursor.fetchone()[0]
-        print(h,"check ...")
-        v1 = td.GetTotal(h)
-        cursor.execute(sql2)
-        connection.commit()
-        v2 = cursor.fetchone()[0]
-        if Decimal(v1) != v2:
-            print("money err",Decimal(v1),v2)
-            exit()
 def Run():
     height = Getforkheight()
     if height > 0:
@@ -304,7 +306,6 @@ def Init():
         print("already init.")
 
 if __name__ == '__main__':
-    #Check()
     #time.sleep(30000)
     Init()
     while True:

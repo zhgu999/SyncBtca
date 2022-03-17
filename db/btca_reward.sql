@@ -16,21 +16,24 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `Relation`
+-- Table structure for table `reward`
 --
 
-DROP TABLE IF EXISTS `Relation`;
+DROP TABLE IF EXISTS `reward`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Relation` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '数据ID',
-  `upper` varchar(64) DEFAULT NULL COMMENT '上级地址',
-  `lower` varchar(64) DEFAULT NULL COMMENT '下级地址',
-  `txid` varchar(64) DEFAULT NULL COMMENT '交易id',
-  `created_at` int(11) DEFAULT NULL COMMENT '创建交易的时间戳',
-  `achievement` bigint(20) DEFAULT '0' COMMENT '成就',
+CREATE TABLE `reward` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `height` int(11) DEFAULT NULL,
+  `amount` bigint(20) DEFAULT NULL COMMENT '持有金额',
+  `rank` int(11) DEFAULT NULL COMMENT '排名',
+  `stake_reward` bigint(20) DEFAULT NULL COMMENT '持币收益',
+  `achievement` bigint(20) DEFAULT NULL COMMENT '下级持有金额之和',
+  `power` bigint(20) DEFAULT NULL,
+  `promotion_reward` bigint(20) DEFAULT NULL COMMENT '推广收益',
+  `address` varchar(64) DEFAULT NULL COMMENT '钱包地址',
   PRIMARY KEY (`id`),
-  KEY `index2` (`lower`)
+  KEY `index2` (`address`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

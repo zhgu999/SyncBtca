@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.36, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.37, for Linux (x86_64)
 --
--- Host: 159.138.123.135    Database: btca
+-- Host: localhost    Database: btca
 -- ------------------------------------------------------
--- Server version	5.7.36-0ubuntu0.18.04.1
+-- Server version	5.7.37-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -31,16 +31,6 @@ CREATE TABLE `Info` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Info`
---
-
-LOCK TABLES `Info` WRITE;
-/*!40000 ALTER TABLE `Info` DISABLE KEYS */;
-INSERT INTO `Info` VALUES (1,1000000000,1.000000,1,1.000000);
-/*!40000 ALTER TABLE `Info` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -51,4 +41,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-01-11 16:32:02
+-- Dump completed on 2022-03-17 11:29:49
